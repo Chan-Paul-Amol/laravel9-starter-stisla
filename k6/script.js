@@ -2,7 +2,7 @@ import http from "k6/http";
 import { group, check } from "k6";
 
 export const options = {
-    stages: [{ duration: "20s", target: 5 }],
+    stages: [{ duration: "40s", target: 5 }],
 };
 
 export default function () {
@@ -27,8 +27,7 @@ export default function () {
             formSelector: "form",
             fields: { email: "superadmin@gmail.com", password: "password" },
         });
-        http.get(`http://127.0.0.1:8000/user-management/user`);
-
+        http.get("http://127.0.0.1:8000/user-management/user");
         const res1 = http.post("http://127.0.0.1:8000/logout");
         check(res1, { Status: (r) => r.status === 200 });
     });
